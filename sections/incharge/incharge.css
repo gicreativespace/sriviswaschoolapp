@@ -1,0 +1,238 @@
+/* --- Common Dashboard Layout --- */
+.dashboard-container {
+    padding: 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.dash-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border-color);
+}
+.dash-header h2 {
+    font-size: 20px;
+    color: var(--primary-blue);
+    font-weight: 700;
+}
+.logout-btn {
+    background: rgba(239, 68, 68, 0.1);
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    color: #ef4444;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+/* --- Page Top Bar --- */
+.page-top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    gap: 10px;
+}
+.class-select {
+    padding: 10px 14px;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    background: var(--white);
+    color: var(--text-dark);
+    outline: none;
+}
+.date-badge {
+    background: var(--bg-light);
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 12px;
+    color: var(--text-light);
+    font-weight: 500;
+}
+
+/* --- Attendance Screen --- */
+.attendance-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding-bottom: 80px;
+}
+.attendance-card {
+    background: var(--white);
+    padding: 14px;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.student-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.roll-badge {
+    background: rgba(15, 76, 129, 0.1);
+    color: var(--primary-blue);
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+}
+.student-name {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-dark);
+}
+.attendance-actions {
+    display: flex;
+    gap: 6px;
+}
+.att-btn {
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    background: var(--white);
+    color: var(--text-light);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 13px;
+}
+.att-btn.active-p {
+    background: rgba(63, 143, 41, 0.1);
+    color: var(--accent-green);
+    border-color: var(--accent-green);
+}
+.att-btn.active-a {
+    background: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+    border-color: #ef4444;
+}
+.att-btn.active-l {
+    background: rgba(249, 115, 22, 0.1);
+    color: #f97316;
+    border-color: #f97316;
+}
+
+/* --- E-Diary Screen --- */
+.subjects-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding-bottom: 80px;
+}
+.subject-card {
+    background: var(--white);
+    padding: 16px;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+}
+.subject-header {
+    margin-bottom: 8px;
+}
+.subject-name {
+    font-weight: 600;
+    color: var(--primary-blue);
+    font-size: 14px;
+}
+.subject-textarea {
+    width: 100%;
+    min-height: 60px;
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    background: var(--bg-light);
+    color: var(--text-dark);
+    resize: vertical;
+    outline: none;
+}
+.subject-textarea:focus {
+    border-color: var(--primary-blue);
+    background: var(--white);
+}
+.add-manual-btn {
+    width: 100%;
+    padding: 12px;
+    background: transparent;
+    border: 1px dashed var(--primary-blue);
+    border-radius: 10px;
+    color: var(--primary-blue);
+    font-weight: 500;
+    font-size: 13px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* --- Announcements Screen --- */
+.tabs-container {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+.tab-btn {
+    flex: 1;
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+    background: var(--white);
+    color: var(--text-light);
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.tab-btn.active {
+    background: rgba(15, 76, 129, 0.1);
+    border-color: var(--primary-blue);
+    color: var(--primary-blue);
+}
+
+/* --- Sticky Bottom Button --- */
+.sticky-bottom {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 16px;
+    background: var(--white);
+    border-top: 1px solid var(--border-color);
+    z-index: 90;
+}
+.btn-primary {
+    width: 100%;
+    background: var(--primary-blue);
+    color: #fff;
+    border: none;
+    padding: 16px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 15px;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* --- Loading Text --- */
+.loading-text {
+    color: var(--text-light);
+    font-size: 14px;
+    text-align: center;
+    padding: 20px;
+}
