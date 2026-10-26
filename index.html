@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sri Viswa Connect</title>
+    
+    <meta name="theme-color" content="#0F4C81">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="assets/images/icon-192.png">
+    
+    <link rel="stylesheet" href="assets/css/global.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Section Specific CSS -->
+    <link rel="stylesheet" href="sections/auth/auth.css">
+    <link rel="stylesheet" href="sections/admin/admin.css">
+</head>
+<body>
+
+    <!-- 1. SPLASH SCREEN -->
+    <div id="global-splash" class="splash-screen">
+        <img src="assets/images/logo.png" alt="Sri Viswa Logo" class="splash-logo-img">
+        <h2 class="splash-title">SRI VISWA CONNECT</h2>
+        <div class="loader"></div>
+    </div>
+
+    <!-- 2. MAIN APP CONTAINER -->
+    <div id="app-container">
+
+        <!-- SECTION: ROLE SELECTION -->
+        <div id="section-role-selection" class="app-section active">
+            <div class="role-container">
+                <div class="top-bar">
+                    <button class="icon-btn" onclick="toggleDarkMode()">
+                        <i id="dark-mode-toggle-icon" class="fa-solid fa-moon"></i>
+                    </button>
+                </div>
+                <div class="role-header">
+                    <img src="assets/images/logo.png" alt="Sri Viswa Logo" class="role-logo">
+                    <h1>Welcome to<br><span>Sri Viswa Connect</span></h1>
+                    <p>Please select your portal to continue</p>
+                </div>
+                <div class="cards-container">
+                    <div class="role-card" onclick="selectPortal('school')">
+                        <div class="icon-box blue-icon"><i class="fa-solid fa-school"></i></div>
+                        <div class="text-box">
+                            <h3>School Portal</h3>
+                            <p>Staff, Teachers & Principal</p>
+                        </div>
+                        <div class="arrow"><i class="fa-solid fa-chevron-right"></i></div>
+                    </div>
+                    <div class="role-card" onclick="selectPortal('parent')">
+                        <div class="icon-box green-icon"><i class="fa-solid fa-people-roof"></i></div>
+                        <div class="text-box">
+                            <h3>Parent Portal</h3>
+                            <p>Track your child's progress</p>
+                        </div>
+                        <div class="arrow"><i class="fa-solid fa-chevron-right"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION: SCHOOL LOGIN -->
+        <div id="section-school-login" class="app-section">
+            <div class="auth-container">
+                <div class="auth-header">
+                    <button class="back-btn" onclick="showSection('role-selection')"><i class="fa-solid fa-arrow-left"></i></button>
+                    <h2>School Portal Login</h2>
+                    <p>Enter your phone number and PIN</p>
+                </div>
+                <form id="school-login-form" onsubmit="handleSchoolLogin(event)">
+                    <div class="input-group">
+                        <label>Phone Number</label>
+                        <input type="tel" id="login-phone" placeholder="10-digit mobile number" required>
+                    </div>
+                    <div class="input-group">
+                        <label>Master PIN</label>
+                        <input type="password" id="login-pin" placeholder="Enter 6-digit PIN" required>
+                    </div>
+                    <button type="submit" class="btn-primary">Login</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- SECTION: PRINCIPAL DASHBOARD (Placeholder - Full UI in Step 3) -->
+        <div id="section-principal-dashboard" class="app-section">
+            <div class="dashboard-container">
+                <header class="dash-header">
+                    <h2>Principal Dashboard</h2>
+                    <button class="logout-btn" onclick="showSection('role-selection')">Logout</button>
+                </header>
+                <div class="dash-content">
+                    <p>Loading dashboard...</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- INSTALL BANNER -->
+    <div id="install-banner" class="install-banner">
+        <div class="install-text"><i class="fa-solid fa-download"></i> Install Sri Viswa App</div>
+        <button id="install-btn" class="install-btn">Install</button>
+    </div>
+
+    <!-- GLOBAL FOOTER -->
+    <footer id="global-footer">
+        <p>© <span id="gi-footer-text" class="gi-text">@GI Creative Space</span></p>
+    </footer>
+
+    <!-- GI POPUP -->
+    <div id="gi-popup" class="popup-overlay">
+        <div class="popup-card">
+            <div class="popup-header">
+                <h3>GI Creative Space</h3>
+                <button class="close-btn" onclick="closeGiPopup()"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <p>For your digital needs, contact us!</p>
+            <div class="contact-actions">
+                <a href="tel:8985361991" class="action-btn call-btn"><i class="fa-solid fa-phone"></i> Call Us</a>
+                <a href="https://wa.me/918985361991" target="_blank" class="action-btn wa-btn"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="assets/js/main.js"></script>
+    
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                    .then(reg => console.log('SW Registered'))
+                    .catch(err => console.log('SW Error:', err));
+            });
+        }
+    </script>
+</body>
+</html>
