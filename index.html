@@ -13,8 +13,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
+    <!-- Section Specific CSS -->
     <link rel="stylesheet" href="sections/auth/auth.css">
     <link rel="stylesheet" href="sections/admin/admin.css">
+    <link rel="stylesheet" href="sections/incharge/incharge.css">
+    <link rel="stylesheet" href="sections/parent/parent.css">
+    <link rel="stylesheet" href="sections/shared/shared.css">
 </head>
 <body>
 
@@ -84,7 +88,7 @@
             </div>
         </div>
 
-        <!-- SECTION: PRINCIPAL DASHBOARD (Full UI - will be added in Step 3) -->
+        <!-- SECTION: PRINCIPAL DASHBOARD -->
         <div id="section-principal-dashboard" class="app-section">
             <div class="dashboard-container">
                 <header class="dash-header">
@@ -92,7 +96,194 @@
                     <button class="logout-btn" onclick="showSection('role-selection')">Logout</button>
                 </header>
                 <div class="dash-content" id="principal-data-container">
-                    <p>Loading dashboard...</p>
+                    <p class="loading-text">Loading dashboard...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION: INCHARGE - ATTENDANCE -->
+        <div id="section-attendance" class="app-section">
+            <div class="dashboard-container">
+                <header class="dash-header">
+                    <h2>Mark Attendance</h2>
+                    <button class="logout-btn" onclick="showSection('role-selection')">Logout</button>
+                </header>
+                <div class="dash-content">
+                    <div class="page-top-bar">
+                        <select id="attendance-class-select" class="class-select">
+                            <option value="Class IX">Class IX</option>
+                            <option value="Class VIII">Class VIII</option>
+                            <option value="Class X">Class X</option>
+                        </select>
+                        <span class="date-badge" id="today-date">26 Oct 2023</span>
+                    </div>
+                    <div id="student-attendance-list" class="attendance-list">
+                        <p class="loading-text">Loading students...</p>
+                    </div>
+                    <div class="sticky-bottom">
+                        <button class="btn-primary" onclick="submitAttendance()">Submit Attendance</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION: INCHARGE - E-DIARY -->
+        <div id="section-e-diary" class="app-section">
+            <div class="dashboard-container">
+                <header class="dash-header">
+                    <h2>Write E-Diary</h2>
+                    <button class="logout-btn" onclick="showSection('role-selection')">Logout</button>
+                </header>
+                <div class="dash-content">
+                    <div class="page-top-bar">
+                        <select id="diary-class-select" class="class-select" onchange="loadSubjects()">
+                            <option value="Class IX">Class IX</option>
+                            <option value="Class VIII">Class VIII</option>
+                            <option value="Class X">Class X</option>
+                        </select>
+                        <span class="date-badge" id="diary-date">26 Oct 2023</span>
+                    </div>
+                    <div id="subjects-container" class="subjects-list">
+                        <p class="loading-text">Loading subjects...</p>
+                    </div>
+                    <button class="add-manual-btn" onclick="addManualSubject()">
+                        <i class="fa-solid fa-plus"></i> Add Manual Subject
+                    </button>
+                    <div class="sticky-bottom">
+                        <button class="btn-primary" onclick="submitEDiary()">Send for Principal Approval</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION: INCHARGE - ANNOUNCEMENTS -->
+        <div id="section-announcements" class="app-section">
+            <div class="dashboard-container">
+                <header class="dash-header">
+                    <h2>Create Announcement</h2>
+                    <button class="logout-btn" onclick="showSection('role-selection')">Logout</button>
+                </header>
+                <div class="dash-content">
+                    <div class="tabs-container">
+                        <button class="tab-btn active" onclick="switchTab(this, 'class')">🏫 Class Notice</button>
+                        <button class="tab-btn" onclick="switchTab(this, 'school')">📢 School Notice</button>
+                    </div>
+                    <div class="input-group" id="class-selector-group" style="margin-top: 20px;">
+                        <label>Select Class</label>
+                        <select id="announcement-class-select">
+                            <option value="Class IX">Class IX</option>
+                            <option value="Class VIII">Class VIII</option>
+                            <option value="Class X">Class X</option>
+                        </select>
+                    </div>
+                    <div class="input-group" style="margin-top: 20px;">
+                        <label>Announcement Message</label>
+                        <textarea id="announcement-message" class="subject-textarea" style="min-height: 120px;" placeholder="Type your announcement here..."></textarea>
+                    </div>
+                    <div class="sticky-bottom">
+                        <button class="btn-primary" onclick="submitAnnouncement()">Send for Approval</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION: PARENT - LINK CHILD -->
+        <div id="section-link-child" class="app-section">
+            <div class="auth-container">
+                <div class="auth-header">
+                    <button class="back-btn" onclick="showSection('role-selection')"><i class="fa-solid fa-arrow-left"></i></button>
+                    <h2>Link Your Child</h2>
+                    <p>Enter your child's details to link</p>
+                </div>
+                <form id="link-child-form" onsubmit="handleLinkChild(event)">
+                    <div class="input-group">
+                        <label>Relation</label>
+                        <select id="child-relation" required>
+                            <option value="Father">Father</option>
+                            <option value="Mother">Mother</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label>Parent Name</label>
+                        <input type="text" id="parent-name" placeholder="Enter your name" required>
+                    </div>
+                    <div class="input-group">
+                        <label>Select Child's Class</label>
+                        <select id="child-class" required>
+                            <option value="Class I">Class I</option>
+                            <option value="Class II">Class II</option>
+                            <option value="Class III">Class III</option>
+                            <option value="Class IV">Class IV</option>
+                            <option value="Class V">Class V</option>
+                            <option value="Class VI">Class VI</option>
+                            <option value="Class VII">Class VII</option>
+                            <option value="Class VIII">Class VIII</option>
+                            <option value="Class IX">Class IX</option>
+                            <option value="Class X">Class X</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label>Roll Number</label>
+                        <input type="number" id="child-roll" placeholder="Enter roll number" required>
+                    </div>
+                    <div class="input-group">
+                        <label>Child's Date of Birth</label>
+                        <input type="date" id="child-dob" required>
+                    </div>
+                    <button type="submit" class="btn-primary">Link Child & Enter</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- SECTION: PARENT DASHBOARD -->
+        <div id="section-parent-dashboard" class="app-section">
+            <div class="dashboard-container">
+                <header class="dash-header">
+                    <h2>Parent Dashboard</h2>
+                    <button class="logout-btn" onclick="showSection('role-selection')">Logout</button>
+                </header>
+                <div class="dash-content" id="parent-data-container">
+                    <div class="child-switcher">
+                        <span class="active-child" id="active-child-name">Loading...</span>
+                        <button class="add-child-btn" onclick="showSection('link-child')">
+                            <i class="fa-solid fa-plus"></i> Add Child
+                        </button>
+                    </div>
+                    <div class="stat-card blue-bg" style="margin-bottom: 20px;">
+                        <h4>Today's Attendance</h4>
+                        <p id="parent-attendance-status" style="font-size: 20px; font-weight: bold; color: #3F8F29;">Loading...</p>
+                    </div>
+                    <h3 class="section-title">Today's E-Diary</h3>
+                    <div id="parent-diary-list">
+                        <p class="loading-text">Loading diary...</p>
+                    </div>
+                    <h3 class="section-title">Notice Board</h3>
+                    <div id="parent-notice-list">
+                        <p class="loading-text">Loading notices...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION: POSTER GENERATOR -->
+        <div id="section-poster-generator" class="app-section">
+            <div class="dashboard-container">
+                <header class="dash-header">
+                    <h2>Poster Generator</h2>
+                    <button class="logout-btn" onclick="showSection('role-selection')">Logout</button>
+                </header>
+                <div class="dash-content">
+                    <div class="poster-preview-container">
+                        <canvas id="posterCanvas" width="800" height="1000"></canvas>
+                    </div>
+                    <div class="poster-actions">
+                        <button class="btn-primary" onclick="downloadPoster()">
+                            <i class="fa-solid fa-download"></i> Download PNG
+                        </button>
+                        <button class="btn-secondary" onclick="shareToWhatsApp()">
+                            <i class="fa-brands fa-whatsapp"></i> Share on WhatsApp
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
