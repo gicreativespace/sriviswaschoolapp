@@ -1,0 +1,208 @@
+:root {
+    --primary-blue: #0F4C81;
+    --secondary-blue: #1E6BB8;
+    --accent-green: #3F8F29;
+    --bg-light: #F8FAFC;
+    --white: #FFFFFF;
+    --text-dark: #1E293B;
+    --text-light: #64748B;
+    --border-color: #E2E8F0;
+    --shadow-soft: 0 8px 24px rgba(15, 76, 129, 0.08);
+}
+
+/* Dark Mode Variables */
+body.dark-mode {
+    --bg-light: #0F172A;
+    --white: #1E293B;
+    --text-dark: #F8FAFC;
+    --text-light: #94A3B8;
+    --border-color: #334155;
+    --shadow-soft: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    background-color: var(--bg-light);
+    color: var(--text-dark);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    transition: background 0.3s, color 0.3s;
+}
+
+/* --- Splash Screen --- */
+.splash-screen {
+    position: fixed;
+    inset: 0;
+    background: var(--white);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    transition: opacity 0.5s ease;
+}
+.splash-screen.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+.splash-logo-img {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    margin-bottom: 15px;
+}
+.splash-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--primary-blue);
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+}
+.loader {
+    width: 40px;
+    height: 40px;
+    border: 3px solid var(--border-color);
+    border-top: 3px solid var(--primary-blue);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+@keyframes spin { 100% { transform: rotate(360deg); } }
+
+/* --- App Container --- */
+#app-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+.app-section {
+    display: none;
+    flex: 1;
+    animation: fadeIn 0.4s ease-out forwards;
+}
+.app-section.active {
+    display: flex;
+    flex-direction: column;
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Footer --- */
+footer {
+    text-align: center;
+    padding: 20px;
+    font-size: 13px;
+    color: var(--text-light);
+    padding-bottom: 30px;
+}
+.gi-text {
+    font-weight: 600;
+    color: var(--primary-blue);
+    cursor: pointer;
+    user-select: none;
+}
+
+/* --- GI Popup --- */
+.popup-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.5);
+    backdrop-filter: blur(4px);
+    z-index: 2000;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+.popup-overlay.active { display: flex; }
+.popup-card {
+    background: var(--white);
+    width: 100%;
+    max-width: 350px;
+    border-radius: 24px;
+    padding: 24px;
+    animation: slideUp 0.3s ease-out;
+}
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.popup-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+.popup-header h3 { color: var(--primary-blue); font-size: 20px; }
+.close-btn {
+    background: var(--bg-light);
+    border: none;
+    width: 30px; height: 30px;
+    border-radius: 50%;
+    color: var(--text-light);
+    cursor: pointer;
+}
+.popup-card p { font-size: 14px; color: var(--text-light); margin-bottom: 20px; line-height: 1.5; }
+.contact-actions { display: flex; gap: 12px; }
+.action-btn {
+    flex: 1; padding: 12px; border-radius: 12px;
+    text-decoration: none; text-align: center;
+    font-weight: 600; font-size: 14px;
+    display: flex; justify-content: center; align-items: center; gap: 8px;
+}
+.call-btn { background: rgba(15, 76, 129, 0.1); color: var(--primary-blue); }
+.wa-btn { background: rgba(63, 143, 41, 0.1); color: var(--accent-green); }
+
+/* --- PWA Install Banner --- */
+.install-banner {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--primary-blue);
+    color: white;
+    padding: 15px 20px;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 999;
+    box-shadow: 0 -4px 12px rgba(0,0,0,0.1);
+    animation: slideUpBanner 0.4s ease-out;
+}
+@keyframes slideUpBanner {
+    from { transform: translateY(100%); }
+    to { transform: translateY(0); }
+}
+.install-banner.show {
+    display: flex;
+}
+.install-text {
+    font-size: 14px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.install-btn {
+    background: white;
+    color: var(--primary-blue);
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
+    cursor: pointer;
+    font-size: 14px;
+}
+@media (display-mode: standalone) {
+    .install-banner { display: none !important; }
+}
